@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="login.css" rel="stylesheet" type="text/css"/>
+	<title>Formulario de inicio de sesión</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <style>
+       
+
+        
+       
+
+
+    </style>
+</head>
+<body>
+    <div id="logindiv">
+        <div Class = "img-logo">
+            <img src="/assets/img/LogoBlanco.png" alt="Logo">
+        </div>
+        
+        <h2>Inicio de sesión</h2>
+    
+        <form id="login-form">
+    
+          <label for="username" class="mail-login">Correo:</label>
+          <input type="text" id="emaillog" name="username" autocomplete="off" required>
+          <br>
+          <label for="password" class="pass-login">Contraseña:</label>
+          <input type="password" id="passwordlog" name="password" required>
+
+          <br>
+
+          <p style="color: rgb(241, 157, 157);" class="hidden" id="error_message">Usuario o contraseña no encontrados</p>
+          
+        </form>     
+        <div class="botones">
+            <button type="submit" id="login">Ingresar</button>  
+        </div> 
+    </div>
+    <div id="page" class="hidden">
+        <datalist id="año">
+            <option value="2023" >        
+        </datalist>
+          
+        <main class="container" id="monitor">
+            <nav class="">
+                <div class="ruta">
+                    <p id="ruta"></p>
+                </div>
+                <div class="nav-tools-2">
+                    <h2>SCHLUMBERGER OFFSHORE SERVICES (MÉXICO) N.V. </h2>
+                    <div class="tools-horizontal">
+                        <span class="material-symbols-outlined">person</span>
+                    <input type="checkbox" id="menu_check" class="hiden">
+                    <label for="menu_check">
+                        <span class="btn-menu material-symbols-outlined" id="menu">menu</span>
+                        <span class="material-symbols-outlined" id="close">menu_open</span>
+                    </label>
+                    
+                    <span class="material-symbols-outlined">settings</span>
+    
+                    </div>
+                    
+                </div>
+                
+            </nav>
+            
+            <label for="año">Selecciona el año de busqueda</label>
+            <input list="año" name="año" id="a" value="2023">
+            <div class="search-table">
+                <span class="material-symbols-outlined" id="btn_buscar" >search</span></a>
+                <input type="text" class="search-input" id="busqueda" autocomplete="nope">
+            </div>
+            <section class="card">
+                <table class="table-list">
+                    <thead>
+                        <tr>
+                            <th>Licencia</th>
+                            <th>Isotopo</th>
+                            <th>Serie</th>
+                            <th>Actividad Original</th>
+                            <th>Fecha frotis</th>
+                            <th>Fecha Informe</th>
+                            <th>Informe</th>
+                        </tr>                   
+                    </thead>
+                    <tbody id="data_content">
+                        <!-- <tr>
+                            <td>A00.200/2589/2023</td>
+                            <td>Cs-137</td>
+                            <td>ASd28522</td>
+                            <td>1.35 Mbq</td>
+                            <td>2023-02-12</td>
+                            <td>2023-02-15</td>
+                            <td><span class="material-symbols-outlined">
+                                download
+                                </span></td>
+                        </tr>  
+                        <tr>
+                            <td>A00.200/2589/2023</td>
+                            <td>Cs-137</td>
+                            <td>BDE522</td>
+                            <td>10 Mbq</td>
+                            <td>2023-02-12</td>
+                            <td>2023-02-15</td>
+                            <td><span class="material-symbols-outlined">
+                                download
+                                </span></td>
+                        </tr>   -->
+                        
+                    </tbody>
+                </table>
+    
+            </section>
+    
+    
+        </main> 
+    </div>
+    
+    
+</body>
+<script type="module" src="/index.js"></script>
+</html>
