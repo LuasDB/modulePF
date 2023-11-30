@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"; 
-import { getAuth,onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth,signOut,onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getStorage,ref,uploadBytes,getDownloadURL,uploadBytesResumable ,getMetadata,updateMetadata} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-storage.js";
 import { collectionGroup, collection, addDoc,getFirestore,query,where,getDocs,doc,setDoc,getDoc} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 const firebaseConfig = {
@@ -19,8 +19,8 @@ const db = getFirestore(app);
 
 // Datos del usuario
 const name = "Marco Romaniz2";
-const email = document.getElementById('emaillog').value;
-const password = document.getElementById('passwordlog').value;
+const email = document.getElementById('emaillog');
+const password = document.getElementById('passwordlog');
 let idUser = null;
 
 //Variables para elementos de DOM
@@ -32,17 +32,20 @@ const btn_buscar=document.getElementById('btn_buscar');
 const a = document.getElementById('a');
 const tabla = document.getElementById('data_content');
 const busqueda = document.getElementById('busqueda');
+const btn_salir = document.getElementById('btn_salir');
 //saul.delafuenteb@gmail.com
 //quesadilla16
 
 //FUNCIONES
 async function consulta(){
-  
-
+ 
+  console.log('CONSULTA');
   tabla.innerHTML='';
   const ref2 = collection(db,"informesPF"+a.value);
   const q = query(ref2,where("clienteId","==","h7MZ6wSR2BVJVxNa9qF9"))
   const res = await getDocs(q);
+  console.log('[INICIO LA CONSULTA]',res);
+
   res.forEach(element => {
       let fila = document.createElement('tr');
       fila.classList.add('renglon');
@@ -62,6 +65,7 @@ async function consulta(){
       fila.appendChild(btnD);
       tabla.appendChild(fila);
   });
+  console.log('[FINALIZO LA CONSULTA]');
 }
 function filtro(){
   let renglones = document.querySelectorAll('.renglon');
@@ -87,8 +91,6 @@ function filtro(){
   });
   
 }
-
-
 function descargar(nombre){
   console.log('[DESCARGANDO...]:',nombre);
   getDownloadURL(ref(storage,'2023/'+nombre)).then((url)=>{
@@ -108,7 +110,7 @@ function listeners(){
         const email = document.getElementById('emaillog').value;
         const password = document.getElementById('passwordlog').value;
         console.log(email);
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email.trim(), password.trim())
           .then((userCredential) => {
            // Signed in
           const user = userCredential.user;
@@ -117,8 +119,11 @@ function listeners(){
           idUser = user.uid;    
           logindiv.classList.add('hidden');
           page.classList.remove('hidden');
-          consulta();      
-          
+          setInterval(() => {
+             return;
+          }, 1500);
+               
+          consulta();
 
           })
         .catch((error) => {
@@ -134,6 +139,22 @@ function listeners(){
   });
 
   busqueda.addEventListener('keyup',filtro);
+
+  a.addEventListener('keyup',consulta);
+
+  btn_salir.addEventListener('click',async()=>{
+    signOut(auth).then(() => {
+      console.log('Se cerro la sesion ');
+      logindiv.classList.remove('hidden');
+      page.classList.add('hidden');
+      email.value='';
+      password.value='';
+      
+  
+  }).catch((error) => {
+    console.log('Un error en el cierre de sesion:' + error);
+  });
+  });
 
   // onAuthStateChanged(auth, (user) => {
   //   if (user) {

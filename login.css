@@ -30,6 +30,10 @@
   margin: 0;
   padding: 50px;
 }
+span:hover{
+  zoom: 145%;
+
+}
 
 h2 {
   font-weight: 600;
@@ -114,15 +118,17 @@ button[type='submit']:hover {
   color: var(--color-texto);
 }
 .img-logo{
-  display: block;
+  display: flex;
+  justify-content: center;
   width: 10%;
   margin:1em auto;
 }
 .img-logo img {
-  width: 100%;
+  width: 80%;
 }
 .botones{
-  display: block;
+  display: flex;
+  justify-content: space-around;
   margin: auto;
   width: 40%;
 }
@@ -132,7 +138,7 @@ button[type='submit']:hover {
     max-width: none;
   }
   .img-logo{
-    width: 40%;
+    width: 80%;
   }
   .botones{
     width: 100%;
