@@ -22,6 +22,7 @@ const name = "Marco Romaniz2";
 const email = document.getElementById('emaillog');
 const password = document.getElementById('passwordlog');
 let idUser = null;
+let empresaId=null;
 
 //Variables para elementos de DOM
 const login = document.getElementById('login');
@@ -37,12 +38,12 @@ const btn_salir = document.getElementById('btn_salir');
 //quesadilla16
 
 //FUNCIONES
-async function consulta(){
+async function consulta(empresaId){
  
   console.log('CONSULTA');
   tabla.innerHTML='';
   const ref2 = collection(db,"informesPF"+a.value);
-  const q = query(ref2,where("clienteId","==","h7MZ6wSR2BVJVxNa9qF9"))
+  const q = query(ref2,where("clienteId","==",empresaId))
   const res = await getDocs(q);
   console.log('[INICIO LA CONSULTA]',res);
 
@@ -99,10 +100,13 @@ function descargar(nombre){
   }).catch(e=>{console.log(e)});
 
 }
+function consultaN(){
+  consulta(empresaId);
+}
 
 function listeners(){
 
-  login.addEventListener('click', (e) =>{
+  login.addEventListener('click',(e) =>{
     let resultado = e.target.innerHTML;
     console.log(resultado);
     switch (resultado){
@@ -111,7 +115,7 @@ function listeners(){
         const password = document.getElementById('passwordlog').value;
         console.log(email);
         signInWithEmailAndPassword(auth, email.trim(), password.trim())
-          .then((userCredential) => {
+          .then(async(userCredential) => {
            // Signed in
           const user = userCredential.user;
           console.log('Autenticado: ' + user.uid);
@@ -122,8 +126,10 @@ function listeners(){
           setInterval(() => {
              return;
           }, 1500);
-               
-          consulta();
+          const refClientes= doc(db,'usuarios/' + idUser);
+          const res = await getDoc(refClientes);
+          empresaId=res.data().empresaId              
+          consulta(empresaId);
 
           })
         .catch((error) => {
@@ -140,7 +146,7 @@ function listeners(){
 
   busqueda.addEventListener('keyup',filtro);
 
-  a.addEventListener('keyup',consulta);
+  a.addEventListener('keyup',consultaN);
 
   btn_salir.addEventListener('click',async()=>{
     signOut(auth).then(() => {
@@ -172,7 +178,12 @@ function listeners(){
   //     document.querySelector('body').style.backgroundColor = 'var(--white)';
   //   }
   // });
-  
+  btn_buscar.addEventListener('click',async()=>{
+    console.log('bUSCANDO----------',idUser);
+    
+
+
+  });
 
 
 
