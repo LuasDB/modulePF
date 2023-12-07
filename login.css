@@ -583,3 +583,6 @@ nav .nav-tools .material-symbols-outlined{
     font-size: 1.2rem;
     color: var(--yellow);
 }
+.letter-main{
+    font-size: medium;
+}
