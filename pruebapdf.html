@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generar PDF desde HTML con Página Adicional</title>
+  <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+  <style>
+    img{
+        width: 50px;
+    }
+    .container{
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    table,th,td{
+        border: 1px solid rebeccapurple;
+        width: 100%;
+        margin-bottom: 100px;
+    }
+    table thead{
+        border: 1px solid rebeccapurple;
+    }
+    .fila{
+        display: flex;
+        flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <!-- Contenido de la primera página -->
+  <div id="pagina1" >
+    <img src="./assets/img/Logo SI.png" alt="logoSIRadiacion">
+    <div class="container">
+        <h3>Informe de pruebas de fuga</h3>
+        <table>
+            <thead>
+                <th>Datos del permisionario de la fuente sellada</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="contenido">
+                            <div class="fila">
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <th>Datos del permisionario de la fuente sellada</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="contenido">
+                            <div class="fila">
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+                                <p><span>Razon Social:</span>SCHLUMBERGER OFFSHORE</p>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+       
+
+    </div>
+    <h3></h3>
+  </div>
+
+  
+
+  <!-- Botón para generar el PDF -->
+  <button onclick="generarPDF()">Generar PDF</button>
+
+  <script>
+    // Variable para llevar el control de la página actual
+    let paginaActual = 1;
+
+    // Función para agregar una nueva página
+   
+
+    // Función para generar el PDF
+    function generarPDF() {
+        console.log('Se envio un boton')
+      // Obtener el elemento que contiene el contenido HTML que quieres convertir
+      const elemento = document.getElementById('pagina1');
+      
+      // Opciones de configuración para el PDF (puedes personalizar según tus necesidades)
+      const opciones = {
+        margin:10,
+        filename: 'mi_documento.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: 'avoid-all' } // Esta opción evita saltos de página automáticos
+      };
+      html2pdf(elemento, opciones);
+
+    
+    }
+  </script>
+</body>
+</html>

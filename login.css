@@ -519,16 +519,20 @@ nav .nav-tools .material-symbols-outlined{
 .table-list{
 
     width: 95%;
-    min-width: 500px;
+    min-width: 600px;
     padding: 10px;
     margin: 10px;
     text-align: center;
     color: var(--gray);
     border-collapse: collapse;
     justify-content: center;
+
      
 
     
+}
+.table-content{
+    overflow-x: scroll;
 }
 .table-list thead th{
     padding: 10px;
